@@ -12,6 +12,7 @@ import BenefitsSection from './components/BenefitsSection';
 import Footer from './components/Footer';
 import Toast from './components/Toast';
 import WavyLinesBackground from './components/WavyLinesBackground';
+import NexusAssistant from './components/NexusAssistant';
 
 import { TOOLS_DATA, CATEGORIES } from './data/tools';
 import './App.css';
@@ -361,6 +362,9 @@ export default function App() {
 
       {/* Toast Feedback */}
       <Toast toast={toast} onClose={() => setToast(null)} />
+
+      {/* NexusAI Assistant Chatbot */}
+      <NexusAssistant onOpenToolDetails={(tool) => setActiveModalTool(tool)} />
     </div>
   );
 }

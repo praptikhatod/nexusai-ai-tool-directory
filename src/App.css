@@ -2777,3 +2777,565 @@ main {
     justify-content: center;
   }
 }
+
+/* ========================================================
+   NEXUS AI ASSISTANT — CHATBOT STYLES
+   Matches existing dark-neon, glassmorphism aesthetic
+   ======================================================== */
+
+/* --- Floating Action Button (FAB) --- */
+.nexus-fab {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 9990;
+  border: none;
+  background: linear-gradient(135deg, var(--accent-pink), var(--accent-blue));
+  color: #fff;
+  border-radius: var(--radius-full);
+  padding: 0;
+  cursor: pointer;
+  box-shadow: 0 4px 24px rgba(255, 60, 172, 0.4), 0 0 40px rgba(56, 189, 248, 0.15);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+}
+
+.nexus-fab:hover {
+  transform: translateY(-3px) scale(1.04);
+  box-shadow: 0 6px 32px rgba(255, 60, 172, 0.55), 0 0 50px rgba(56, 189, 248, 0.25);
+}
+
+.nexus-fab-inner {
+  display: flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.85rem 1.3rem;
+  position: relative;
+  z-index: 2;
+}
+
+.nexus-fab-label {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.9rem;
+  letter-spacing: 0.01em;
+}
+
+.nexus-fab-pulse {
+  position: absolute;
+  inset: -4px;
+  border-radius: inherit;
+  background: linear-gradient(135deg, var(--accent-pink), var(--accent-blue));
+  opacity: 0;
+  z-index: 1;
+  animation: nexusFabPulse 2.5s ease-in-out infinite;
+}
+
+@keyframes nexusFabPulse {
+  0%, 100% { opacity: 0; transform: scale(1); }
+  50% { opacity: 0.25; transform: scale(1.12); }
+}
+
+/* --- Chat Overlay --- */
+.nexus-chat-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9995;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-end;
+  padding: 1rem;
+  animation: nexusOverlayIn 0.25s ease;
+}
+
+@keyframes nexusOverlayIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* --- Chat Panel --- */
+.nexus-chat-panel {
+  width: 420px;
+  max-width: 100%;
+  height: min(700px, calc(100dvh - 2rem));
+  border-radius: var(--radius-xl);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-medium);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 60, 172, 0.1);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  animation: nexusPanelSlideIn 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes nexusPanelSlideIn {
+  from { opacity: 0; transform: translateY(30px) scale(0.96); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+/* --- Header --- */
+.nexus-chat-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.15rem;
+  background: linear-gradient(135deg, rgba(255, 60, 172, 0.08), rgba(56, 189, 248, 0.08));
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.nexus-chat-header-left {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+}
+
+.nexus-chat-avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--accent-pink), var(--accent-blue));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  box-shadow: 0 0 12px rgba(255, 60, 172, 0.35);
+}
+
+.nexus-chat-header-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.nexus-chat-title {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1.2;
+}
+
+.nexus-chat-subtitle {
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.nexus-chat-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.nexus-chat-action-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+}
+
+.nexus-chat-action-btn:hover {
+  background: var(--bg-surface-hover);
+  color: var(--text-primary);
+}
+
+.nexus-chat-close-btn:hover {
+  background: rgba(255, 60, 172, 0.15);
+  color: var(--accent-pink);
+}
+
+/* --- Messages Area --- */
+.nexus-chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.nexus-chat-messages::-webkit-scrollbar {
+  width: 6px;
+}
+
+.nexus-chat-messages::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.nexus-chat-messages::-webkit-scrollbar-thumb {
+  background: var(--border-medium);
+  border-radius: var(--radius-full);
+}
+
+/* --- Chat Bubbles --- */
+.nexus-chat-bubble {
+  display: flex;
+  gap: 0.6rem;
+  max-width: 92%;
+  animation: nexusBubbleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes nexusBubbleIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.nexus-bubble-user {
+  align-self: flex-end;
+  flex-direction: row-reverse;
+}
+
+.nexus-bubble-bot {
+  align-self: flex-start;
+}
+
+.nexus-bubble-avatar {
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.nexus-avatar-bot {
+  background: linear-gradient(135deg, var(--accent-pink), var(--accent-blue));
+  color: #fff;
+}
+
+.nexus-avatar-user {
+  background: var(--bg-surface-elevated);
+  color: var(--text-muted);
+  border: 1px solid var(--border-subtle);
+}
+
+.nexus-bubble-content {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.nexus-bubble-text {
+  font-size: 0.855rem;
+  line-height: 1.55;
+  color: var(--text-primary);
+  padding: 0.7rem 0.9rem;
+  border-radius: var(--radius-lg);
+  word-break: break-word;
+}
+
+.nexus-bubble-bot .nexus-bubble-text {
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-top-left-radius: var(--radius-sm);
+}
+
+.nexus-bubble-user .nexus-bubble-text {
+  background: linear-gradient(135deg, rgba(255, 60, 172, 0.15), rgba(56, 189, 248, 0.12));
+  border: 1px solid rgba(255, 60, 172, 0.2);
+  border-top-right-radius: var(--radius-sm);
+  color: var(--text-primary);
+}
+
+/* --- Recommendation Cards --- */
+.nexus-recs-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.nexus-rec-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border-medium);
+  border-radius: var(--radius-md);
+  padding: 0.75rem;
+  transition: all var(--transition-fast);
+}
+
+.nexus-rec-card:hover {
+  border-color: var(--accent-pink);
+  box-shadow: 0 0 16px rgba(255, 60, 172, 0.12);
+}
+
+.nexus-rec-card-header {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-bottom: 0.4rem;
+}
+
+.nexus-rec-icon {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: #fff;
+}
+
+.nexus-rec-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.nexus-rec-name {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.nexus-rec-category {
+  font-size: 0.68rem;
+  color: var(--text-dim);
+  font-weight: 500;
+}
+
+.nexus-rec-tagline {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+  margin-bottom: 0.3rem;
+}
+
+.nexus-rec-why {
+  font-size: 0.73rem;
+  color: var(--accent-blue);
+  font-style: italic;
+  line-height: 1.4;
+  margin-bottom: 0.5rem;
+}
+
+.nexus-rec-explore-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.76rem;
+  font-weight: 600;
+  color: var(--accent-pink);
+  padding: 0.35rem 0.7rem;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 60, 172, 0.08);
+  border: 1px solid rgba(255, 60, 172, 0.2);
+  transition: all var(--transition-fast);
+  cursor: pointer;
+}
+
+.nexus-rec-explore-btn:hover {
+  background: rgba(255, 60, 172, 0.18);
+  border-color: var(--accent-pink);
+  transform: translateX(2px);
+}
+
+/* --- Typing Indicator --- */
+.nexus-typing-indicator {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  padding: 0.6rem 0.9rem;
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  border-top-left-radius: var(--radius-sm);
+}
+
+.nexus-typing-spinner {
+  animation: nexusSpin 1s linear infinite;
+  color: var(--accent-pink);
+}
+
+@keyframes nexusSpin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* --- Suggested Prompts --- */
+.nexus-suggestions {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding-top: 0.3rem;
+}
+
+.nexus-suggestions-label {
+  font-size: 0.72rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-dim);
+  padding-left: 2.4rem;
+}
+
+.nexus-suggestions-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  padding-left: 2.4rem;
+}
+
+.nexus-suggestion-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.4rem 0.75rem;
+  border-radius: var(--radius-full);
+  background: var(--bg-surface-elevated);
+  border: 1px solid var(--border-subtle);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.nexus-suggestion-chip:hover {
+  border-color: var(--accent-pink);
+  color: var(--accent-pink);
+  background: rgba(255, 60, 172, 0.08);
+  transform: translateY(-1px);
+}
+
+.nexus-suggestion-icon {
+  font-size: 0.85rem;
+}
+
+/* --- Input Area --- */
+.nexus-chat-input-area {
+  padding: 0.75rem 1rem;
+  border-top: 1px solid var(--border-subtle);
+  background: var(--bg-surface);
+  flex-shrink: 0;
+}
+
+.nexus-chat-input-row {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: var(--bg-input);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  padding: 0.3rem 0.4rem 0.3rem 0.85rem;
+  transition: border-color var(--transition-fast);
+}
+
+.nexus-chat-input-row:focus-within {
+  border-color: var(--accent-pink);
+  box-shadow: 0 0 0 3px rgba(255, 60, 172, 0.1);
+}
+
+.nexus-chat-input {
+  flex: 1;
+  background: none;
+  border: none;
+  outline: none;
+  font-size: 0.85rem;
+  color: var(--text-primary);
+  padding: 0.5rem 0;
+  min-width: 0;
+}
+
+.nexus-chat-input::placeholder {
+  color: var(--text-dim);
+}
+
+.nexus-chat-send-btn {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-surface-elevated);
+  color: var(--text-dim);
+  border: 1px solid var(--border-subtle);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.nexus-chat-send-btn.active {
+  background: linear-gradient(135deg, var(--accent-pink), var(--accent-blue));
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 0 12px rgba(255, 60, 172, 0.3);
+}
+
+.nexus-chat-send-btn.active:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 18px rgba(255, 60, 172, 0.4);
+}
+
+.nexus-chat-send-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.nexus-chat-disclaimer {
+  font-size: 0.63rem;
+  color: var(--text-dim);
+  text-align: center;
+  margin-top: 0.45rem;
+  line-height: 1.3;
+}
+
+/* --- Mobile Responsive --- */
+@media (max-width: 480px) {
+  .nexus-fab {
+    bottom: 1rem;
+    right: 1rem;
+  }
+
+  .nexus-fab-label {
+    display: none;
+  }
+
+  .nexus-fab-inner {
+    padding: 0.8rem;
+  }
+
+  .nexus-chat-overlay {
+    padding: 0;
+  }
+
+  .nexus-chat-panel {
+    width: 100%;
+    height: 100dvh;
+    border-radius: 0;
+    max-width: 100%;
+  }
+
+  .nexus-suggestions-grid {
+    padding-left: 0.5rem;
+  }
+
+  .nexus-suggestions-label {
+    padding-left: 0.5rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .nexus-chat-panel {
+    width: 380px;
+  }
+}
