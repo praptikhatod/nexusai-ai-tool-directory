@@ -131,7 +131,7 @@ export default function Footer({ onCategoryClick }) {
         {/* Bottom copyright & Back to top */}
         <div className="footer-bottom-bar">
           <div className="footer-copyright">
-            © 2026 NexusAI Tools Directory. Built with <Heart size={13} fill="#FF3CAC" color="#FF3CAC" style={{ display: 'inline', verticalAlign: 'middle', margin: '0 2px' }} /> for the AI Community.
+            © 2026 NexusAI. Built with <Heart size={13} fill="#FF3CAC" color="#FF3CAC" style={{ display: 'inline', verticalAlign: 'middle', margin: '0 2px' }} /> for the AI Community.
           </div>
 
           <button

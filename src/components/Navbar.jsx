@@ -50,7 +50,7 @@ export default function Navbar({
             <Sparkles className="logo-sparkle" size={20} />
           </div>
           <div className="brand-text">
-            <span className="brand-name"><span className="brand-highlight-pink">AI</span> Tools Directory</span>
+            <span className="brand-name">Nexus<span className="brand-highlight-pink">AI</span></span>
           </div>
         </a>
 
